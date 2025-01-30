@@ -1,0 +1,50 @@
+SFMLGUI app class {
+  rendering
+  main loop
+  etc.
+}
+
+Stylesheet class {
+  basically css-style stylesheet settings
+
+  some examples:
+  display-text(NOT a text field, simply static words)
+  text-align
+  bg-color
+  margin-size
+  etc.
+}
+
+Widget Class {
+  Parent of ALL gui widgets
+
+  Contains basic data all widgets share:
+  xPos, yPos
+  displayText
+  isVisible
+  Stylesheet
+
+  setParent()
+  listParent()
+  listChildren()
+}
+
+Button Class {
+  Parent of All types of button-style interactables
+}
+
+Container Class {
+  Parent of ALL container style widgets
+  parent of:
+  hboxContainer, vboxContainer, panelContainer
+  textFieldContainer
+}
+
+toolbar class {
+  choose what side of the screen it snaps to
+  and you have a sidebar, menubar, or whatever
+
+  each toolbar has a setting to display the tooltip thingy
+  the one that shows you a more detailed explanation of the
+  element you're hovering does
+}
