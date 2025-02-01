@@ -16,7 +16,7 @@ class Window {
   Window();
   Window(unsigned int width, unsigned int height, sf::String title);
 
-  void Window::init();
+  void init();
   void run();
 };
 

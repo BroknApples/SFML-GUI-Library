@@ -29,7 +29,7 @@ Window::Window(unsigned int width, unsigned int height, sf::String title) {
 }
 
 void Window::init() {
-  window_ = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+  window_ = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "sfmlGUI Test");
 }
 
 void Window::run() {

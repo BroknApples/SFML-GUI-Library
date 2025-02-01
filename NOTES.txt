@@ -1,0 +1,5 @@
+aight, so here's the main thing
+
+MAKE THE WINDOW NOT part of the ui library. instead make it insert a SFML window into the constuctor of a UI class as a reference.
+
+allows for multiple different UI classes to switch between 2 layouts quickly maybe
