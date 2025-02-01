@@ -3,23 +3,9 @@
 #include "window.hpp"
 
 int main() {
-  auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(144);
-
-    while (window.isOpen()) {
-        while (const std::optional event = window.pollEvent()) {
-            if (event->is<sf::Event::Closed>())
-            {
-                window.close();
-            }
-        }
-
-        window.clear();
-        window.display();
-    }
-  // Window window;
-  // window.init();
-  // window.run();
+  Window app("sfmlGUI Test", 1280u, 720u, 60);
+  app.init();
+  app.run();
 
   return 0;
 }

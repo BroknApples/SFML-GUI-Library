@@ -3,3 +3,21 @@ aight, so here's the main thing
 MAKE THE WINDOW NOT part of the ui library. instead make it insert a SFML window into the constuctor of a UI class as a reference.
 
 allows for multiple different UI classes to switch between 2 layouts quickly maybe
+
+
+
+------------
+On GUI click tracking (did you press and hold a gui element)....
+
+in window.cpp handleEvents(), on a mouse click and hold event,
+check through the array of widgets in the sfmlGUI object in REVERSE to get top first for overlapping objects
+and then edit it
+
+make this a function in the sfmlGUI class that will be called every time there is a relevant event, -- mouse click, button press etc.
+this will handle all gui events for the window
+
+
+
+--------
+use widget ids for everything, not windowpos struct thingy
+check the position clicked when clicking and if it corresponds to a widget's position, add it's widget id to a queue of updates or whatever
