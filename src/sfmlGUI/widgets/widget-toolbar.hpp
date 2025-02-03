@@ -1,0 +1,6 @@
+#ifndef WIDGET_TOOLBAR_HPP
+#define WIDGET_TOOLBAR_HPP
+
+
+
+#endif // WIDGET_TOOLBAR_HPP

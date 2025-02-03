@@ -22,6 +22,9 @@ sfmlGUI::~sfmlGUI() {
 **************************** PUBLIC ****************************
 ***************************************************************/
 
+/**
+ * @brief Given some flags, do the corresponding events in the gui
+ */
 void sfmlGUI::guiEvents(std::vector<std::pair<GUI_EVENT_FLAGS, WindowPos>> flags) {
 
 }

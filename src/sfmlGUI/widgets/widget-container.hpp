@@ -4,7 +4,10 @@
 #include "gui-widget.hpp"
 
 class guiContainer : public guiWidget {
+ private:
 
+ public:
+  guiContainer();
 };
 
 #endif // WIDGET_CONTAINER_HPP
