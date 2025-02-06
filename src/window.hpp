@@ -5,6 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "sfmlGUI/sfml-gui.hpp"
+
 class Window {
  private:
   sf::RenderWindow render_window_;

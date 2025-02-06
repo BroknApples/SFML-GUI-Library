@@ -53,6 +53,13 @@ void Window::init() {
   render_window_ = sf::RenderWindow(sf::VideoMode({window_width_, window_height_}), window_title_);
   render_window_.setFramerateLimit(window_framerate_limit_);
   window_ready_ = true;
+
+  // gui widget testing
+  guiContainer title_box();
+  sfmlGUI window_gui(render_window_);
+  window_gui.addWidget(title_box);
+  // TODO: aight, perhaps we add a sfmlGUI class as a parent when making the 
+  //       widget, which would allow use to add it to the widget list
 }
 
 void Window::run() {

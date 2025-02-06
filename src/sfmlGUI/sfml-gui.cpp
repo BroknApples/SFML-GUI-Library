@@ -35,14 +35,20 @@ void sfmlGUI::updateGUI() {
 
 void sfmlGUI::drawGUI() {
   for (int i = widget_count_ - 1; i > 0; i++) {
-    // do stuff with widgets_[i] here;
+    widget_list_[i]->render();
+    // TODO: Render the children of these widgets
   }
 }
 
 /**
- * @brief Add a widget to an instance of widget
+ * @brief Add a guiWidget to a GUI manager (sfmlGUI class)
  */
 void sfmlGUI::addWidget(guiWidget& widget) {
+  // Set widget properties
   widget.setWidgetID(widget_id_++);
+  widget.setRenderWindow(render_window_);
+
+  // Add to widget list
   widget_list_.push_back(std::make_unique<guiWidget>(std::move(widget)));
+  widget_count_++;
 }

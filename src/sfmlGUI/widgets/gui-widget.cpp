@@ -5,15 +5,17 @@
 ***************************************************************/
 
 guiWidget::guiWidget() 
-    : xPos_(0), yPos_(0), sizeX_(0), sizeY_(0) {
+    : xPos_(0.0f), yPos_(0.0f), sizeX_(0.0f), sizeY_(0.0f) {
   display_text_ = "";
   stylesheet_ = Stylesheet();
+  render_window_ = nullptr;
 }
 
-guiWidget::guiWidget(int xPos, int yPos, int sizeX, int sizeY) 
+guiWidget::guiWidget(float xPos, float yPos, float sizeX, float sizeY) 
     : xPos_(xPos), yPos_(yPos), sizeX_(sizeX), sizeY_(sizeY) {
   display_text_ = "";
   stylesheet_ = Stylesheet();
+  render_window_ = nullptr;
 }
 
 /***************************************************************
@@ -22,6 +24,18 @@ guiWidget::guiWidget(int xPos, int yPos, int sizeX, int sizeY)
 
 // TODO: Look into changing guiWidget to being initialized with a reference to a sfmlGUI object
 // which would disallow changes to a widgetID through conventional means
+
+/**
+ * @brief DO NOT USE, FOR USE ONLY BY THE sfmlGUI CLASS...
+ *        Set the sf::RenderWindow to draw this guiWidget on
+ * 
+ * @param render_window: Pointer to a sf::RenderWindow object
+ * 
+ * @returns bool: True/False of success
+ */
+bool setRenderWindow(sf::RenderWindow* render_window) {
+
+}
 
 /**
  * @brief DO NOT USE, FOR USE ONLY BY THE sfmlGUI CLASS...
@@ -52,7 +66,7 @@ uint32_t guiWidget::getWidgetID() {
  * 
  * @returns bool: True/False of success
  */
-bool guiWidget::setPosition(int xPos, int yPos) {
+bool guiWidget::setPosition(float xPos, float yPos) {
   xPos_ = xPos;
   yPos_ = yPos;
 }
@@ -60,9 +74,9 @@ bool guiWidget::setPosition(int xPos, int yPos) {
 /**
  * @brief Get the position of a guiWidget
  * 
- * @returns std::pair<int, int>: Pair of integers that contains the xPos in .first and yPos in .second
+ * @returns std::pair<float, float>: Pair of floats that contains the xPos in .first and yPos in .second
  */
-std::pair<int, int> guiWidget::getPosition() {
+std::pair<float, float> guiWidget::getPosition() {
   return std::make_pair(xPos_, yPos_);
 }
 
@@ -74,7 +88,7 @@ std::pair<int, int> guiWidget::getPosition() {
  * 
  * @returns bool: True/False of success
  */
-bool guiWidget::setSize(int sizeX, int sizeY) {
+bool guiWidget::setSize(float sizeX, float sizeY) {
   sizeX_ = sizeX;
   sizeY_ = sizeY;
 }
@@ -82,9 +96,9 @@ bool guiWidget::setSize(int sizeX, int sizeY) {
 /**
  * @brief Get the size of a guiWidget
  * 
- * @returns std::pair<int, int>: Pair of integers that contains the sizeX in .first and sizeY in .second
+ * @returns std::pair<float, float>: Pair of floats that contains the sizeX in .first and sizeY in .second
  */
-std::pair<int, int> guiWidget::getSize() {
+std::pair<float, float> guiWidget::getSize() {
   return std::make_pair(sizeX_, sizeY_);
 }
 
@@ -95,7 +109,7 @@ std::pair<int, int> guiWidget::getSize() {
  * 
  * @returns bool: True/False of success
  */
-bool guiWidget::setDisplayText(std::string s) {
+bool guiWidget::setDisplayText(std::string& s) {
   display_text_ = s;
 }
 
@@ -126,4 +140,37 @@ bool guiWidget::setStylesheet(Stylesheet stylesheet) {
  */
 Stylesheet& guiWidget::getStylesheet() {
   return stylesheet_;
+}
+
+/**
+ * @brief Add a child guiWidget
+ * 
+ * @param widget: Widget to set as a child guiWidget
+ * 
+ * @returns bool: True/False of success
+ */
+bool guiWidget::addChild(guiWidget& widget) {
+  if (children_.emplace_back(widget)) return true;
+
+  return false;
+}
+
+/**
+ * @brief Remove a child guiWidget
+ * 
+ * @param widget: Widget to remove as a child guiWidget
+ * 
+ * @returns bool: True/False of success
+ */
+bool guiWidget::removeChild(guiWidget& widget)  {
+  const int kChildrenCount = children_.size();
+  for (int i = 0; i < kChildrenCount; i++) {
+    if (&widget == children_[i]) {
+      children_.erase(children_.begin() + i);
+      return true;
+    }
+  }
+
+  // If the loop did not return, the target guiWidget is not a child of the current guiWidget
+  return false;
 }
