@@ -33,8 +33,9 @@ guiWidget::guiWidget(float xPos, float yPos, float sizeX, float sizeY)
  * 
  * @returns bool: True/False of success
  */
-bool setRenderWindow(sf::RenderWindow* render_window) {
-
+bool guiWidget::setRenderWindow(sf::RenderWindow* render_window) {
+  render_window_ = render_window;
+  return true;
 }
 
 /**
@@ -47,6 +48,7 @@ bool setRenderWindow(sf::RenderWindow* render_window) {
  */
 bool guiWidget::setWidgetID(uint32_t id) {
   id_ = id;
+  return true;
 }
 
 /**
@@ -69,6 +71,7 @@ uint32_t guiWidget::getWidgetID() {
 bool guiWidget::setPosition(float xPos, float yPos) {
   xPos_ = xPos;
   yPos_ = yPos;
+  return true;
 }
 
 /**
@@ -91,6 +94,7 @@ std::pair<float, float> guiWidget::getPosition() {
 bool guiWidget::setSize(float sizeX, float sizeY) {
   sizeX_ = sizeX;
   sizeY_ = sizeY;
+  return true;
 }
 
 /**
@@ -111,6 +115,7 @@ std::pair<float, float> guiWidget::getSize() {
  */
 bool guiWidget::setDisplayText(std::string& s) {
   display_text_ = s;
+  return true;
 }
 
 /**
@@ -131,6 +136,7 @@ std::string guiWidget::getDisplayText() {
  */
 bool guiWidget::setStylesheet(Stylesheet stylesheet) {
   stylesheet_ = stylesheet;
+  return true;
 }
 
 /**
@@ -149,10 +155,11 @@ Stylesheet& guiWidget::getStylesheet() {
  * 
  * @returns bool: True/False of success
  */
-bool guiWidget::addChild(guiWidget& widget) {
-  if (children_.emplace_back(widget)) return true;
+bool guiWidget::addChild(guiWidget widget) {
+  std::shared_ptr<guiWidget> ptr = std::make_shared<guiWidget>(std::move(widget));
+  children_.emplace_back(std::move(ptr));
 
-  return false;
+  return true;
 }
 
 /**
@@ -163,9 +170,29 @@ bool guiWidget::addChild(guiWidget& widget) {
  * @returns bool: True/False of success
  */
 bool guiWidget::removeChild(guiWidget& widget)  {
-  const int kChildrenCount = children_.size();
-  for (int i = 0; i < kChildrenCount; i++) {
-    if (&widget == children_[i]) {
+  for (int i = 0; i < children_.size(); i++) {
+    if (widget == *children_[i]) {
+      children_.erase(children_.begin() + i);
+      return true;
+    }
+  }
+
+  // If the loop did not return, the target guiWidget is not a child of the current guiWidget
+  return false;
+}
+
+
+/**
+ * @brief Remove a child guiWidget
+ * 
+ * @param widget_id: Widget ID to remove as a child guiWidget
+ * 
+ * @returns bool: True/False of success
+ */
+bool guiWidget::removeChild(uint32_t widget_id) {
+
+  for (int i = 0; i < children_.size(); i++) {
+    if (widget_id == children_[i]->getWidgetID()) {
       children_.erase(children_.begin() + i);
       return true;
     }

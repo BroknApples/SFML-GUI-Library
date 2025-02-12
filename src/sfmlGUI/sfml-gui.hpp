@@ -12,7 +12,7 @@ class sfmlGUI {
  private:
   sf::RenderWindow* render_window_;
 
-  std::vector<std::unique_ptr<guiWidget>> widget_list_;
+  std::vector<guiWidget*> widget_list_;
   int widget_count_;
   uint32_t widget_id_;
 
@@ -24,7 +24,7 @@ class sfmlGUI {
   void updateGUI();
   void drawGUI();
 
-  void addWidget(guiWidget& widget);
+  void addWidget(guiWidget* widget);
 };
 
 #endif // SFML_GUI_HPP

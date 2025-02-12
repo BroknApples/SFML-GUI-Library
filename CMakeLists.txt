@@ -20,7 +20,14 @@ FetchContent_MakeAvailable(SFML)
 set(SOURCES
   src/main.cpp
   src/window.cpp
-)
+  # sfmlGUI
+  src/sfmlGUI/sfml-gui.cpp
+  # Widgets
+  src/sfmlGUI/widgets/gui-widget.cpp
+  src/sfmlGUI/widgets/widget-button.cpp
+  src/sfmlGUI/widgets/widget-container.cpp
+  src/sfmlGUI/widgets/widget-toolbar.cpp
+  )
 
 add_executable(sfmlGUI ${SOURCES})
 target_compile_features(sfmlGUI PRIVATE cxx_std_17)

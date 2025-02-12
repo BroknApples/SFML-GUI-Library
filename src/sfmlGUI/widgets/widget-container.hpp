@@ -11,6 +11,7 @@ class guiContainer : public guiWidget {
 
  public:
   guiContainer();
+  guiContainer(float xPos, float yPos, float sizeX, float sizeY);
 
   void checkEvents() override;
   void update() override;
