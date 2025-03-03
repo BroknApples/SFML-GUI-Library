@@ -8,12 +8,25 @@
 ******************* CONSTRUCTORS/DESTRUCTORS *******************
 ***************************************************************/
 
+/**
+ * @brief Create sfmlGUI class instance
+ */
+sfmlGUI::sfmlGUI() {}
+
+/**
+ * @brief Creeat sfmlGUI class instance
+ * 
+ * @param render_window: Window to draw on
+ */
 sfmlGUI::sfmlGUI(sf::RenderWindow& render_window) {
   render_window_ = &render_window;
   widget_count_ = 0;
   widget_id_ = 1;
 }
 
+/**
+ * @brief sfmlGUI destructor -- Clear all dynamic memory
+ */
 sfmlGUI::~sfmlGUI() {
   // for (int i = 0; i < widget_count_; i++) {
   //   delete widget_list_[i];
@@ -23,6 +36,13 @@ sfmlGUI::~sfmlGUI() {
 /***************************************************************
 **************************** PUBLIC ****************************
 ***************************************************************/
+
+/**
+ * @brief Init essential gui variables
+ */
+void sfmlGUI::init() {
+  initFonts();
+}
 
 /**
  * @brief Given some flags, do the corresponding events in the gui

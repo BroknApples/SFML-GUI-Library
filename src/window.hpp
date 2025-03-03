@@ -10,8 +10,9 @@
 class Window {
  private:
   sf::RenderWindow render_window_;
-  unsigned int window_width_;
-  unsigned int window_height_;
+  sfmlGUI gui_;
+  uint window_width_;
+  uint window_height_;
   std::string window_title_;
   int window_framerate_limit_;
 
@@ -22,7 +23,7 @@ class Window {
   void render();
 
  public:
-  Window(sf::String window_title = "SFML Window", unsigned int window_width = 1920u, unsigned int window_height = 1080u, int window_framerate_limit = 60);
+  Window(sf::String window_title = "SFML Window", uint window_width = 1920u, uint window_height = 1080u, int window_framerate_limit = 60);
   ~Window();
 
   void init();

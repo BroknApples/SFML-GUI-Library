@@ -5,14 +5,14 @@
 ***************************************************************/
 
 guiWidget::guiWidget() 
-    : xPos_(0.0f), yPos_(0.0f), sizeX_(0.0f), sizeY_(0.0f) {
+    : xPos_(0.0f), yPos_(0.0f), minimum_sizeX_(0.0f), minimum_sizeY_(0.0f) {
   display_text_ = "";
   stylesheet_ = Stylesheet();
   render_window_ = nullptr;
 }
 
-guiWidget::guiWidget(float xPos, float yPos, float sizeX, float sizeY) 
-    : xPos_(xPos), yPos_(yPos), sizeX_(sizeX), sizeY_(sizeY) {
+guiWidget::guiWidget(float xPos, float yPos, float minimum_sizeX, float minimum_sizeY) 
+    : xPos_(xPos), yPos_(yPos), minimum_sizeX_(minimum_sizeX), minimum_sizeY_(minimum_sizeY) {
   display_text_ = "";
   stylesheet_ = Stylesheet();
   render_window_ = nullptr;
@@ -91,9 +91,9 @@ std::pair<float, float> guiWidget::getPosition() {
  * 
  * @returns bool: True/False of success
  */
-bool guiWidget::setSize(float sizeX, float sizeY) {
-  sizeX_ = sizeX;
-  sizeY_ = sizeY;
+bool guiWidget::setMinimumSize(float minimum_sizeX, float minimum_sizeY) {
+  minimum_sizeX_ = minimum_sizeX;
+  minimum_sizeY_ = minimum_sizeY;
   return true;
 }
 
@@ -103,7 +103,7 @@ bool guiWidget::setSize(float sizeX, float sizeY) {
  * @returns std::pair<float, float>: Pair of floats that contains the sizeX in .first and sizeY in .second
  */
 std::pair<float, float> guiWidget::getSize() {
-  return std::make_pair(sizeX_, sizeY_);
+  return std::make_pair(minimum_sizeX_, minimum_sizeY_);
 }
 
 /**

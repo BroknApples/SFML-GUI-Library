@@ -1,5 +1,5 @@
-#ifndef WIDGETS_HPP
-#define WIDGETS_HPP
+#ifndef GUI_WIDGET_HPP
+#define GUI_WIDGET_HPP
 
 #include <algorithm>
 #include <cstdint>
@@ -8,14 +8,18 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../gui-stylesheet.hpp"
+#include "../utils.hpp"
 
 class guiWidget {
  protected:
   uint32_t id_;
 
-  float xPos_, yPos_;
-  float sizeX_, sizeY_;
+  float xPos_; // X-Position of the center of the screen object
+  float yPos_; // Y-Position of the center of the screen object
+  float minimum_sizeX_; // Minimum width of the widget
+  float minimum_sizeY_; // Minimum height of the object
+
+  bool is_visible;
 
   std::string display_text_; // may need to be changed to sf::String idk how text printing works yet on SFML
   Stylesheet stylesheet_;
@@ -25,7 +29,7 @@ class guiWidget {
 
  public:
   guiWidget();
-  guiWidget(float xPos, float yPos, float sizeX, float sizeY);
+  guiWidget(float xPos, float yPos, float minimum_sizeX, float minimum_sizeY);
 
   bool setRenderWindow(sf::RenderWindow* render_window);
 
@@ -35,7 +39,7 @@ class guiWidget {
   bool setPosition(float xPos, float yPos);
   std::pair<float, float> getPosition();
 
-  bool setSize(float sizeX, float sizeY);
+  bool setMinimumSize(float sizeX, float sizeY);
   std::pair<float, float> getSize();
   
   bool setDisplayText(std::string& s);
@@ -57,9 +61,4 @@ class guiWidget {
   }
 };
 
-// Widget List
-#include "widget-button.hpp"
-#include "widget-container.hpp"
-#include "widget-toolbar.hpp"
-
-#endif // WIDGETS_HPP
+#endif // GUI_WIDGET_HPP

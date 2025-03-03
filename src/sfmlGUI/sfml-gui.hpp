@@ -5,8 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gui-event-flags.hpp"
-#include "widgets/gui-widget.hpp"
+#include "widgets.hpp"
+#include "utils.hpp"
 
 class sfmlGUI {
  private:
@@ -17,13 +17,16 @@ class sfmlGUI {
   uint32_t widget_id_;
 
  public:
+  sfmlGUI();
   sfmlGUI(sf::RenderWindow& render_window);
   ~sfmlGUI();
+  
+  void init();
 
   void guiEvents(std::vector<std::pair<GUI_EVENT_FLAGS, WindowPos>> flags);
   void updateGUI();
   void drawGUI();
-
+  
   void addWidget(guiWidget* widget);
 };
 
